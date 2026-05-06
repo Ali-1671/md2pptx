@@ -1890,6 +1890,11 @@ THE SOFTWARE.
 </thead>
 <tbody>
 <tr>
+<td align="left">6.3.2+</td>
+<td align="right">6&nbsp;May&nbsp;2026</td>
+<td align="left">Enhanced slide footers: <a href="https://github.com/MartinPacker/md2pptx/issues/213">Issue 213</a>.</td>
+</tr>
+<tr>
 <td align="left">6.3.2</td>
 <td align="right">3&nbsp;May&nbsp;2026</td>
 <td align="left"><a class="magiclink magiclink-github magiclink-mention" href="https://github.com/tmchow" title="GitHub User: tmchow">@tmchow</a> fixed <a href="https://github.com/MartinPacker/md2pptx/issues/211">Issue 211</a> where a missing template file would cause termination.</td>
@@ -4480,8 +4485,8 @@ For example:</p>
 <ol>
 <li>Lines are separated by<code>&lt;br/&gt;</code>.</li>
 <li>For slides before the first Section Slide the title will be empty.</li>
-<li>There will be no symbol substitution - beyond what was in the section title.</li>
-<li>The case of the terms must be as shown. For example, <code>&lt;presTitle1&gt;</code> must be coded exactly as shown.</li>
+<li>Symbol substitution is supported. For example <code>&amp;rarr;</code> would resolve to &rarr;.</li>
+<li>The terms are case insensitive. For example you could code <code>&lt;PresTitle&gt;</code>.</li>
 </ol>
 <h5 id="specifying-footer-font-size-with-footerfontsize">Specifying Footer Font Size With <code>footerFontSize</code><a class="headerlink" href="#specifying-footer-font-size-with-footerfontsize" title="Permanent link"></a></h5>
 <p><a id='specifying-footer-font-size-with-footerfontsize'></a></p>

@@ -8,8 +8,8 @@ First argument is file to write to
 Reads from stdin
 """
 
-md2pptx_level = "6.3.2"
-md2pptx_date = "3 May, 2026"
+md2pptx_level = "6.3.2+"
+md2pptx_date = "6 May, 2026"
 
 import re
 import sys
@@ -411,45 +411,46 @@ def substituteFooterVariables(footerText, liveFooters):
     # Decide if the footer should be a live link to the section slide
     wantLiveFooter = (
         (prs.lastSectionSlide is not None)
-        & (footerText.find("<section") > -1)
+        & (footerText.lower().find("<section") > -1)
         & (liveFooters == "yes")
     )
 
     # Substitute any section title occurrences
-    sectionTitleLines = resolveSymbols(prs.lastSectionTitle).split("<br/>")
+    sectionTitleLines = resolveSymbols(prs.lastSectionTitle).replace("\\_", "_").split("<br/>")
 
-    footerText = footerText.replace("<section>", sectionTitleLines[0])
-    footerText = footerText.replace("<section1>", sectionTitleLines[0])
+    footerText = re.sub("<section>", sectionTitleLines[0], footerText, flags=re.IGNORECASE)
+    footerText = re.sub("<section1>", sectionTitleLines[0], footerText, flags=re.IGNORECASE)
 
     if len(sectionTitleLines) > 1:
-        footerText = footerText.replace("<section2>", sectionTitleLines[1])
+        footerText = re.sub("<section2>", sectionTitleLines[1], footerText, flags=re.IGNORECASE)
+
 
     if len(sectionTitleLines) > 2:
-        footerText = footerText.replace("<section3>", sectionTitleLines[2])
+        footerText = re.sub("<section3>", sectionTitleLines[2], footerText, flags=re.IGNORECASE)
 
     # Substitute any presentation title occurrences
-    presTitleLines = resolveSymbols(prs.lastPresTitle).split("<br/>")
+    presTitleLines = resolveSymbols(prs.lastPresTitle).replace("\\_", "_").split("<br/>")
 
-    footerText = footerText.replace("<presTitle>", presTitleLines[0])
-    footerText = footerText.replace("<presTitle1>", presTitleLines[0])
+    footerText = re.sub("<prestitle>", presTitleLines[0], footerText, flags=re.IGNORECASE)
+    footerText = re.sub("<prestitle1>", presTitleLines[0], footerText, flags=re.IGNORECASE)
 
     if len(presTitleLines) > 1:
-        footerText = footerText.replace("<presTitle2>", presTitleLines[1])
+        footerText = re.sub("<prestitle2>", presTitleLines[1], footerText, flags=re.IGNORECASE)
 
     if len(presTitleLines) > 2:
-        footerText = footerText.replace("<presTitle3>", presTitleLines[2])
+        footerText = re.sub("<prestitle3>", presTitleLines[2], footerText, flags=re.IGNORECASE)
 
     # Substitute any presentation subtitle occurrences
     presSubtitleLines = resolveSymbols(prs.lastPresSubtitle).split("<br/>")
 
-    footerText = footerText.replace("<presSubtitle>", presSubtitleLines[0])
-    footerText = footerText.replace("<presSubtitle1>", presSubtitleLines[0])
+    footerText = re.sub("<pressubtitle>", presSubtitleLines[0], footerText, flags=re.IGNORECASE)
+    footerText = re.sub("<pressubtitle1>", presSubtitleLines[0], footerText, flags=re.IGNORECASE)
 
     if len(presSubtitleLines) > 1:
-        footerText = footerText.replace("<presSubtitle2>", presSubtitleLines[1])
+        footerText = re.sub("<pressubtitle2>", presSubtitleLines[1], footerText, flags=re.IGNORECASE)
 
     if len(presSubtitleLines) > 2:
-        footerText = footerText.replace("<presSubtitle3>", presSubtitleLines[2])
+        footerText = re.sub("<pressubtitle3>", presSubtitleLines[2], footerText, flags=re.IGNORECASE)
 
     # Make newlines happen
     footerText = footerText.replace("<br/>", "\n")
@@ -4177,9 +4178,11 @@ def createSlide(presentation, slideNumber, slideInfo):
                 leftFooterBoxLeft, footerBoxTop, leftFooterBoxWidth, footerBoxHeight
             )
 
-            leftFooter.text, wantHyperLink = substituteFooterVariables(
+            leftFooterT2, wantHyperLink = substituteFooterVariables(
                 leftFooterText, liveFooters
             )
+
+            addFormattedText(leftFooter.text_frame.paragraphs[0],leftFooterT2)
 
             if wantHyperLink:
                 createShapeHyperlinkAndTooltip(leftFooter, prs.lastSectionSlide, "")
@@ -4196,9 +4199,11 @@ def createSlide(presentation, slideNumber, slideInfo):
                 middleFooterBoxLeft, footerBoxTop, middleFooterBoxWidth, footerBoxHeight
             )
 
-            middleFooter.text, wantHyperLink = substituteFooterVariables(
+            middleFooterT2, wantHyperLink = substituteFooterVariables(
                 middleFooterText, liveFooters
             )
+
+            addFormattedText(middleFooter.text_frame.paragraphs[0],middleFooterT2)
 
             if wantHyperLink:
                 createShapeHyperlinkAndTooltip(middleFooter, prs.lastSectionSlide, "")
@@ -4216,9 +4221,11 @@ def createSlide(presentation, slideNumber, slideInfo):
                 rightFooterBoxLeft, footerBoxTop, rightFooterBoxWidth, footerBoxHeight
             )
 
-            rightFooter.text, wantHyperLink = substituteFooterVariables(
+            rightFooterT2, wantHyperLink = substituteFooterVariables(
                 rightFooterText, liveFooters
             )
+
+            addFormattedText(rightFooter.text_frame.paragraphs[0],rightFooterT2)
 
             if wantHyperLink:
                 createShapeHyperlinkAndTooltip(rightFooter, prs.lastSectionSlide, "")
