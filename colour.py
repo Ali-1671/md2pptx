@@ -6,6 +6,26 @@ from pptx.dml.color import RGBColor, MSO_THEME_COLOR
 import re
 
 RGBRegex = re.compile("#([0-9a-fA-F]{6})")
+_THEME_COLOUR_MAP = {
+    "NONE": MSO_THEME_COLOR.NOT_THEME_COLOR,
+    "ACCENT 1": MSO_THEME_COLOR.ACCENT_1,
+    "ACCENT 2": MSO_THEME_COLOR.ACCENT_2,
+    "ACCENT 3": MSO_THEME_COLOR.ACCENT_3,
+    "ACCENT 4": MSO_THEME_COLOR.ACCENT_4,
+    "ACCENT 5": MSO_THEME_COLOR.ACCENT_5,
+    "ACCENT 6": MSO_THEME_COLOR.ACCENT_6,
+    "BACKGROUND 1": MSO_THEME_COLOR.BACKGROUND_1,
+    "BACKGROUND 2": MSO_THEME_COLOR.BACKGROUND_2,
+    "DARK 1": MSO_THEME_COLOR.DARK_1,
+    "DARK 2": MSO_THEME_COLOR.DARK_2,
+    "FOLLOWED HYPERLINK": MSO_THEME_COLOR.FOLLOWED_HYPERLINK,
+    "HYPERLINK": MSO_THEME_COLOR.HYPERLINK,
+    "LIGHT 1": MSO_THEME_COLOR.LIGHT_1,
+    "LIGHT 2": MSO_THEME_COLOR.LIGHT_2,
+    "TEXT 1": MSO_THEME_COLOR.TEXT_1,
+    "TEXT 2": MSO_THEME_COLOR.TEXT_2,
+    "MIXED": MSO_THEME_COLOR.MIXED,
+}
 
 def setColour(x, colour):
     colourType, colourValue = colour
@@ -16,43 +36,7 @@ def setColour(x, colour):
 
 
 def parseThemeColour(value):
-    value2 = value.upper()
-    if value2 == "NONE":
-        return MSO_THEME_COLOR.NOT_THEME_COLOR
-    elif value2 == "ACCENT 1":
-        return MSO_THEME_COLOR.ACCENT_1
-    elif value2 == "ACCENT 2":
-        return MSO_THEME_COLOR.ACCENT_2
-    elif value2 == "ACCENT 3":
-        return MSO_THEME_COLOR.ACCENT_3
-    elif value2 == "ACCENT 4":
-        return MSO_THEME_COLOR.ACCENT_4
-    elif value2 == "ACCENT 5":
-        return MSO_THEME_COLOR.ACCENT_5
-    elif value2 == "ACCENT 6":
-        return MSO_THEME_COLOR.ACCENT_6
-    elif value2 == "BACKGROUND 1":
-        return MSO_THEME_COLOR.BACKGROUND_1
-    elif value2 == "BACKGROUND 2":
-        return MSO_THEME_COLOR.BACKGROUND_2
-    elif value2 == "DARK 1":
-        return MSO_THEME_COLOR.DARK_1
-    elif value2 == "DARK 2":
-        return MSO_THEME_COLOR.DARK_2
-    elif value2 == "FOLLOWED HYPERLINK":
-        return MSO_THEME_COLOR.FOLLOWED_HYPERLINK
-    elif value2 == "HYPERLINK":
-        return MSO_THEME_COLOR.HYPERLINK
-    elif value2 == "LIGHT 1":
-        return MSO_THEME_COLOR.LIGHT_1
-    elif value2 == "LIGHT 2":
-        return MSO_THEME_COLOR.LIGHT_2
-    elif value2 == "TEXT 1":
-        return MSO_THEME_COLOR.TEXT_1
-    elif value2 == "TEXT 2":
-        return MSO_THEME_COLOR.TEXT_2
-    elif value2 == "MIXED":
-        return MSO_THEME_COLOR.MIXED
+    return _THEME_COLOUR_MAP.get(value.upper())
 
 def parseColour(value):
     if value[0] == "#":
