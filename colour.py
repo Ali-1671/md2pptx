@@ -6,6 +6,7 @@ from pptx.dml.color import RGBColor, MSO_THEME_COLOR
 import re
 
 RGBRegex = re.compile("#([0-9a-fA-F]{6})")
+
 _THEME_COLOUR_MAP = {
     "NONE": MSO_THEME_COLOR.NOT_THEME_COLOR,
     "ACCENT 1": MSO_THEME_COLOR.ACCENT_1,
@@ -36,7 +37,16 @@ def setColour(x, colour):
 
 
 def parseThemeColour(value):
-    return _THEME_COLOUR_MAP.get(value.upper())
+    themeColour = _THEME_COLOUR_MAP.get(value.upper())
+    
+    if themeColour == None:
+        errorThemeColour = MSO_THEME_COLOR.ACCENT_1
+        print(f"Invalid theme colour - {value}. Using {errorThemeColour}.")
+        
+        return errorThemeColour
+    else:
+        return themeColour
+
 
 def parseColour(value):
     if value[0] == "#":
