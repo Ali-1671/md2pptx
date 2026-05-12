@@ -501,7 +501,7 @@ To quote from the python-pptx license statement:
 
 |Level|Date|What|
 |:-|-:|:-|
-|6.3.2+|6&nbsp;May&nbsp;2026|Enhanced slide footers: [Issue 213](https://github.com/MartinPacker/md2pptx/issues/213).|
+|6.3.2+|12&nbsp;May&nbsp;2026|Enhanced slide footers: [Issue 213](https://github.com/MartinPacker/md2pptx/issues/213).<br/>@maayanmatsliah-tech refactored `parseThemeColour`: [Issue 214](https://github.com/MartinPacker/md2pptx/issues/214).|
 |6.3.2|3&nbsp;May&nbsp;2026|@tmchow fixed [Issue 211](https://github.com/MartinPacker/md2pptx/issues/211) where a missing template file would cause termination.|
 |6.3.1|18&nbsp;April&nbsp;2026|Fixed crasher in Section Expansion code|
 |6.3|26&nbsp;March&nbsp;2026|Introduced [XML-Related Helper routines](#xml-related-helper-routines).|
