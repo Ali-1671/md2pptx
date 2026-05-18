@@ -80,7 +80,7 @@ You can do multiple paragraphs and even use symbols.
 
 ### Documentation
 
-As md2pptx has lots of function the documentation is a good place to discover it.
+As md2pptx has lots of functions, the documentation is a good place to discover them.
 
 See `docs/user-guide.html` or `docs/user-guide.md`.
 
