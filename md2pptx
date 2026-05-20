@@ -4556,6 +4556,7 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
 
     footnotesTitle = globals.processingOptions.getCurrentOption("footnotesTitle")
     footnotesPerPage = globals.processingOptions.getCurrentOption("footnotesPerPage")
+    footnotesFontSize = globals.processingOptions.getCurrentOption("footnotesFontSize")
 
     footnoteCount = len(footnoteDefinitions)
 
@@ -4590,7 +4591,13 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
                 footnoteSlides.append(slide)
 
                 # Turn off bulleting
-                removeBullets(findBodyShape(slide).text_frame)
+                bodyFrame = findBodyShape(slide).text_frame
+                removeBullets(bodyFrame)
+
+                if footnotesFontSize > 0:
+                    for paragraph in bodyFrame.paragraphs:
+                        for run in paragraph.runs:
+                            run.font.size = Pt(footnotesFontSize)
 
                 slideNumber += 1
             bullets = []
@@ -4634,7 +4641,13 @@ def createFootnoteSlides(prs, slideNumber, footnoteDefinitions):
     footnoteSlides.append(slide)
 
     # Turn off bulleting
-    removeBullets(findBodyShape(slide).text_frame)
+    bodyFrame = findBodyShape(slide).text_frame
+    removeBullets(bodyFrame)
+
+    if footnotesFontSize > 0:
+        for paragraph in bodyFrame.paragraphs:
+            for run in paragraph.runs:
+                run.font.size = Pt(footnotesFontSize)
 
     slideNumber += 1
 
@@ -4994,7 +5007,7 @@ globals.processingOptions.setOptionValuesArray(
 
 # Footnotes defaults
 globals.processingOptions.setOptionValuesArray(
-    [["footnotesTitle", "Footnotes"], ["footnotesPerPage", 20]]
+    [["footnotesTitle", "Footnotes"], ["footnotesPerPage", 20], ["footnotesFontSize", 0]]
 )
 
 # Table Of Contents defaults
@@ -5493,6 +5506,9 @@ for line in metadata_lines:
 
     elif name == "footnotesperpage":
         globals.processingOptions.setOptionValues(name, int(value))
+
+    elif name == "footnotesfontsize":
+        globals.processingOptions.setOptionValues(name, float(value))
 
     elif name == "footnotestitle":
         globals.processingOptions.setOptionValues(name, value)
