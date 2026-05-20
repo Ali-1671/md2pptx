@@ -43,7 +43,7 @@ Def month = May
 
 Def year = 2026
 
-Def time = 16&colon;01
+Def time = 16&colon;53
 
 Def date = 20 May&comma; 2026
 
@@ -379,6 +379,14 @@ CSV Stop
 ..... ..... ..... ..... .....  Footer Flexibility
 
 ..... ..... ..... .....  Specifying Footer Font Size With `footerFontSize`
+
+..... ..... .....  Footnotes Metadata
+
+..... ..... ..... .....  Footnotes Title Prefix - footnotesTitle
+
+..... ..... ..... .....  Footnotes Font Size - footnotesFontSize
+
+..... ..... ..... .....  Footnotes Per Page - footnotesPerPage
 
 ..... ..... .....  Slide Heading Levels - `TopHeadingLevel`
 

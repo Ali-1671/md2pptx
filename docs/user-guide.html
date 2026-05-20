@@ -1463,6 +1463,12 @@ img {
 <li><a href="#specifying-footer-font-size-with-footerfontsize">Specifying Footer Font Size With <code>footerFontSize</code></a></li>
 </ul>
 </li>
+<li><a href="#footnotes-metadata">Footnotes Metadata</a><ul>
+<li><a href="#footnotes-title-prefix-footnotestitle">Footnotes Title Prefix - footnotesTitle</a></li>
+<li><a href="#footnotes-font-size-footnotesfontsize">Footnotes Font Size - footnotesFontSize</a></li>
+<li><a href="#footnotes-per-page-footnotesperpage">Footnotes Per Page - footnotesPerPage</a></li>
+</ul>
+</li>
 <li><a href="#slide-heading-levels-topheadinglevel">Slide Heading Levels - <code>TopHeadingLevel</code></a></li>
 <li><a href="#slides-with-multiple-content-blocks">Slides With Multiple Content Blocks</a><ul>
 <li><a href="#horizontal-or-vertical-split-contentsplitdirection">Horizontal Or Vertical Split - <code>ContentSplitDirection</code></a></li>
@@ -1891,8 +1897,8 @@ THE SOFTWARE.
 <tbody>
 <tr>
 <td align="left">6.3.2+</td>
-<td align="right">12&nbsp;May&nbsp;2026</td>
-<td align="left">Enhanced slide footers: <a href="https://github.com/MartinPacker/md2pptx/issues/213">Issue 213</a>.<br/><a class="magiclink magiclink-github magiclink-mention" href="https://github.com/maayanmatsliah-tech" title="GitHub User: maayanmatsliah-tech">@maayanmatsliah-tech</a> refactored <code>parseThemeColour</code>: <a href="https://github.com/MartinPacker/md2pptx/issues/214">Issue 214</a>.<br/>Make <code>parseThemeColour</code> handle bad theme colour specification better: <a href="https://github.com/MartinPacker/md2pptx/issues/215">Issue 215</a>.<br/><a class="magiclink magiclink-github magiclink-mention" href="https://github.com/troutrot" title="GitHub User: troutrot">@troutrot</a> fixed Issues <a href="https://github.com/MartinPacker/md2pptx/pull/217">217</a> and <a href="https://github.com/MartinPacker/md2pptx/pull/218">218</a>.</td>
+<td align="right">20&nbsp;May&nbsp;2026</td>
+<td align="left">Enhanced slide footers: <a href="https://github.com/MartinPacker/md2pptx/issues/213">Issue 213</a>.<br/><a class="magiclink magiclink-github magiclink-mention" href="https://github.com/maayanmatsliah-tech" title="GitHub User: maayanmatsliah-tech">@maayanmatsliah-tech</a> refactored <code>parseThemeColour</code>: <a href="https://github.com/MartinPacker/md2pptx/issues/214">Issue 214</a>.<br/>Make <code>parseThemeColour</code> handle bad theme colour specification better: <a href="https://github.com/MartinPacker/md2pptx/issues/215">Issue 215</a>.<br/><a class="magiclink magiclink-github magiclink-mention" href="https://github.com/troutrot" title="GitHub User: troutrot">@troutrot</a> fixed Issues <a href="https://github.com/MartinPacker/md2pptx/pull/217">217</a>&comma; <a href="https://github.com/MartinPacker/md2pptx/pull/218">218</a>&comma; <a href="https://github.com/MartinPacker/md2pptx/issues/221">221</a>/<a href="https://github.com/MartinPacker/md2pptx/pull/223">223</a>.</td>
 </tr>
 <tr>
 <td align="left">6.3.2</td>
@@ -3652,7 +3658,8 @@ This is something md2pptx can&rsquo;t do for you.
 You can change these colours under &ldquo;Themes&rdquo; in the Slide Master editor.</p>
 <h2 id="creating-footnotes">Creating Footnotes<a class="headerlink" href="#creating-footnotes" title="Permanent link"></a></h2>
 <p><a id="creating-footnotes"></a></p>
-<p>You can create and reference footnotes.</p>
+<p>You can create and reference footnotes.
+You can also control some aspects of their display with <a href="#footnotes-metadata">footnotes metadata</a>.</p>
 <h3 id="creating-a-footnote">Creating A Footnote<a class="headerlink" href="#creating-a-footnote" title="Permanent link"></a></h3>
 <p><a id="creating-a-footnote"></a></p>
 <p>To define a footnote code <code>[^name]:</code> on a new line. The remainder of the line will be the footnote text.</p>
@@ -4494,6 +4501,36 @@ For example:</p>
 <pre><code>footerFontSize: 14.0
 </code></pre>
 <p>will cause footers to be displayed with a 14 point font. The default value is 8 points.</p>
+<h4 id="footnotes-metadata">Footnotes Metadata<a class="headerlink" href="#footnotes-metadata" title="Permanent link"></a></h4>
+<p><a id="footnotes-metadata"></a></p>
+<p>You can specify a number of things about how footnotes slides are created:</p>
+<ul>
+<li>Footnote slide titles - with <a href="#footnotes-title-prefix-footnotestitle">footnotesTitle</a></li>
+<li>Footnote font size - with <a href="#footnotes-font-size-footnotesfontsize">footnotesFontSize</a></li>
+<li>The number of footnotes per page - with <a href="#footnotes-per-page-footnotesperpage">footnotesPerPage</a></li>
+</ul>
+<p><strong>Note:</strong> md2pptx and python-pptx don&rsquo;t know exactly how much vertical space a footnote will take.
+You will probably need to experiment with some of the above metadata items to get a good fit.</p>
+<h5 id="footnotes-title-prefix-footnotestitle">Footnotes Title Prefix - footnotesTitle<a class="headerlink" href="#footnotes-title-prefix-footnotestitle" title="Permanent link"></a></h5>
+<p><a id="footnotes-title-prefix-footnotestitle"></a></p>
+<p>By default the first slide with footnotes on it will have a title &ldquo;Footnotes - 1&rdquo;, and so on.
+You can change the title to begin with something other than &ldquo;Footnotes&rdquo;:</p>
+<pre><code>footnotesTitle: Notes
+</code></pre>
+<h5 id="footnotes-font-size-footnotesfontsize">Footnotes Font Size - footnotesFontSize<a class="headerlink" href="#footnotes-font-size-footnotesfontsize" title="Permanent link"></a></h5>
+<p><a id="footnotes-font-size-footnotesfontsize"></a></p>
+<p>By default the text of a footnote is whatever the template (if any) defaults to.
+You can override this by specifying the footnote font size in points:</p>
+<pre><code>footnotesFontSize: 14
+</code></pre>
+<p>If you specify <code>0</code> it will be as if you hadn&rsquo;t coded <code>footnotesFontSize</code> at all.</p>
+<h5 id="footnotes-per-page-footnotesperpage">Footnotes Per Page - footnotesPerPage<a class="headerlink" href="#footnotes-per-page-footnotesperpage" title="Permanent link"></a></h5>
+<p><a id="footnotes-per-page-footnotesperpage"></a></p>
+<p>By default md2pptx places 20 footnotes on a footnotes slide.
+If you need to change this you can code something like</p>
+<pre><code>footnotesPerPage: 10
+</code></pre>
+<p>This will reduce the maximum number of footnotes on a slide to 10.</p>
 <p><a id="slide-heading-levels-topheadinglevel"></a></p>
 <h4 id="slide-heading-levels-topheadinglevel">Slide Heading Levels - <code>TopHeadingLevel</code><a class="headerlink" href="#slide-heading-levels-topheadinglevel" title="Permanent link"></a></h4>
 <p>The usual heading levels for different types of slides are as follows:</p>
