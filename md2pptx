@@ -6596,6 +6596,9 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
                 inList = False
                 inCard = False
 
+                # Create a new empty table entry for this block
+                tableRows.append([])
+
             # Start the creation of a new row
             tableRow = []
 
@@ -6638,9 +6641,7 @@ for lineNumber, line in enumerate(linesAfterConcatenation):
             for mediaItem in sorted(mediaItems):
                 tableRow.append(mediaItem[2])
 
-            # Add table row to saved table rows
-            if len(tableRows) == 0:
-                tableRows.append([])
+            # Add table row to the current table block
             tableRows[-1].append(tableRow)
 
             inTitle = False
