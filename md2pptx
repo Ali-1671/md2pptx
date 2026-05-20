@@ -1125,9 +1125,15 @@ def parseTitleText(titleLineString):
     slideTitleWithPossibleHref = titleLineString.strip().rstrip("#").rstrip()
 
     if hrefMatch := slideHrefRegex.match(slideTitleWithPossibleHref):
-        # Use the explicit href
-        slideTitle = hrefMatch.group(1)
-        href = hrefMatch.group(2)
+        candidate_href = hrefMatch.group(2)
+        if candidate_href.startswith("^"):
+            # Footnote marker — do not strip from the title
+            href = ""
+            slideTitle = slideTitleWithPossibleHref
+        else:
+            # Use the explicit heading href
+            slideTitle = hrefMatch.group(1)
+            href = candidate_href
     else:
         # No href
         href = ""
