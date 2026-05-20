@@ -38,14 +38,11 @@ def setColour(x, colour):
 
 def parseThemeColour(value):
     themeColour = _THEME_COLOUR_MAP.get(value.upper())
-    
-    if themeColour == None:
-        errorThemeColour = MSO_THEME_COLOR.ACCENT_1
-        print(f"Invalid theme colour - {value}. Using {errorThemeColour}.")
-        
-        return errorThemeColour
-    else:
-        return themeColour
+
+    if themeColour is None:
+        raise ValueError(f"Unknown theme colour: {value!r}")
+
+    return themeColour
 
 
 def parseColour(value):
