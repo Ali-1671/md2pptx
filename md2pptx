@@ -1862,7 +1862,8 @@ def createAbstractSlide(presentation, slideNumber, titleText, paragraphs):
     p = abstractBox.text_frame.paragraphs[0]
     tf = abstractBox.text_frame
     f = p.font
-    f.size = Pt(22)
+    baseTextSize = globals.processingOptions.getCurrentOption("baseTextSize")
+    f.size = Pt(baseTextSize) if baseTextSize > 0 else Pt(22)
     for para, abstractParagraph in enumerate(paragraphs):
         paragraphLevel, paragraphText, paragraphType = abstractParagraph
 
@@ -1870,12 +1871,12 @@ def createAbstractSlide(presentation, slideNumber, titleText, paragraphs):
             # Spacer paragraph
             p = tf.add_paragraph()
             f = p.font
-            f.size = Pt(22)
+            f.size = Pt(baseTextSize) if baseTextSize > 0 else Pt(22)
 
             # Content paragraph
             p = tf.add_paragraph()
             f = p.font
-            f.size = Pt(22)
+            f.size = Pt(baseTextSize) if baseTextSize > 0 else Pt(22)
         addFormattedText(p, paragraphText)
 
     tf.word_wrap = True
