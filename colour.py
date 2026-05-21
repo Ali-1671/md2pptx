@@ -37,15 +37,16 @@ def setColour(x, colour):
 
 
 def parseThemeColour(value):
-    themeColour = _THEME_COLOUR_MAP.get(value.upper())
-    
-    if themeColour == None:
+    normalisedValue = " ".join(value.split())
+    themeColour = _THEME_COLOUR_MAP.get(normalisedValue.upper())
+
+    if themeColour is None:
         errorThemeColour = MSO_THEME_COLOR.ACCENT_1
         print(f"Invalid theme colour - {value}. Using {errorThemeColour}.")
-        
+
         return errorThemeColour
-    else:
-        return themeColour
+
+    return themeColour
 
 
 def parseColour(value):
